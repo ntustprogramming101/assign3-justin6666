@@ -102,17 +102,17 @@ void draw() {
     break;
     
     case goDown:
-        
-        if(groundHogMove < 20){
-        groundHogMove++;
-        groundHog = loadImage("img/groundhogDown.png");
-        if(groundHogY%moveRange==0){movement=stop;}  
-        }else{
+    groundHog = loadImage("img/groundhogDown.png");
+    if(soilY>=1600){
          groundHogY+=5;
-         groundHog = loadImage("img/groundhogDown.png");
+         
          moveRange=80;
-        }
-        if(groundHogY%moveRange==0){movement=stop;}  
+         if(groundHogY%moveRange==0){movement=stop;} 
+    }else{
+    soilY+=5;
+    if(soilY%moveRange==0){movement=stop;} 
+    }
+         
        //if(groundHogY>=1600){  
        //if(groundHogY%moveRange==0){movement=stop;}}
         break;
@@ -290,12 +290,10 @@ void keyPressed(){
 if(groundHogX%moveRange==0 && groundHogY%moveRange==0){
  switch(keyCode){
  case DOWN:
- soilY+=moveRange;
-  if(soilY>=1600){
-  soilY=1600;
-  groundHogY+=80;}
+
   if(groundHogY>=height){groundHogY=height-80;}
  if(groundHogY+moveRange<height){movement=goDown;}
+ 
  break;
  case RIGHT:
  if(groundHogX+moveRange<width){movement=goRight;}
